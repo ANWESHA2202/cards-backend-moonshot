@@ -1,7 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-import fetch from 'node-fetch';
-
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
@@ -13,8 +12,7 @@ app.use(cors());
 
 app.post('/generate-token', async(req, res) => {
     try {
-        const res = await fetch('https://devcore02.cimet.io/v1/generate-token', {
-            method: 'POST',
+        const res = await axios.post('https://devcore02.cimet.io/v1/generate-token', {
             headers: {
                 'Content-Type': 'application/json',
                 'Api-key': process.env.GENERATE_TOKEN_API_KEY
