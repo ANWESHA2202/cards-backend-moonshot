@@ -8,6 +8,8 @@ const app = express();
 
 // Enable CORS for all routes
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 //rest api routes
 
