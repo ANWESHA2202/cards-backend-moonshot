@@ -12,19 +12,21 @@ app.use(cors());
 
 app.post('/generate-token', async(req, res) => {
     try {
-        const res = await axios.post('https://devcore02.cimet.io/v1/generate-token', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Api-key': process.env.GENERATE_TOKEN_API_KEY
-            },
-        })
-        const data = await res.json()
-        res.status(200).json(data)
-
+        const response = await axios.post(
+            'https://devcore02.cimet.io/v1/generate-token', {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Api-key': process.env.GENERATE_TOKEN_API_KEY
+                }
+            }
+        );
+        const resp_data = response.data;
+        res.status(200).json(resp_data);
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
-})
+});
+
 
 //get request for testing
 app.get('/', (req, res) => {
