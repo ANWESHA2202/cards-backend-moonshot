@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fetch = require('node-fetch');
 require('dotenv').config();
 
 const app = express();
@@ -15,17 +16,14 @@ app.post('/generate-token', async(req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-
+                'Api-key': process.env.GENERATE_TOKEN_API_KEY
             },
-            body: JSON.stringify({
-                'Api-key': process.env.GENERATE_TOKEN_API_KEY,
-            })
         })
         const data = await res.json()
         res.status(200).json(data)
 
     } catch (err) {
-        res.status(500).json([{ message: err.message }])
+        res.status(500).json({ message: err.message })
     }
 })
 
